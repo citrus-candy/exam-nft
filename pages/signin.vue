@@ -3,6 +3,9 @@
     <v-card class="ma-auto">
       <v-card-title class="pa-8 justify-center">
         <div class="text-h4">ユーザー登録</div>
+        <v-btn class="back" text height="50" to="/login" nuxt>
+          <v-icon>mdi-arrow-left</v-icon>
+        </v-btn>
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
@@ -29,37 +32,12 @@
               ></v-text-field>
             </v-col>
             <v-col cols="5" sm="auto">
-              <v-btn class="pa-5" @click="signin">
+              <v-btn class="pa-5" @click="signin" :loading="isLoading">
                 <div class="text-h6 pl-4 pr-4">登録</div>
               </v-btn>
             </v-col>
           </v-row>
         </v-form>
-      </v-card-text>
-      <v-divider></v-divider>
-      <v-card-text>
-        <v-row class="flex justify-center ma-2">
-          <v-col cols="8" sm="auto">
-            <v-btn
-              class="pa-5 text-capitalize caption"
-              @click="login"
-              color="#00FF00"
-            >
-              <v-icon left color="red">mdi-google</v-icon>
-              <div class="text-h6">Googleで登録</div>
-            </v-btn>
-          </v-col>
-          <v-col cols="8" sm="auto">
-            <v-btn
-              class="pa-5 text-capitalize caption"
-              @click="login"
-              color="#00FFFF"
-            >
-              <v-icon left color="blue">mdi-twitter</v-icon>
-              <div class="text-h6">Twitterで登録</div>
-            </v-btn>
-          </v-col>
-        </v-row>
       </v-card-text>
     </v-card>
   </v-container>
@@ -81,14 +59,32 @@ export default {
       passwordShow: false,
       passwordRules: {
         required: value => !!value || "パスワードは必須です"
-      }
+      },
+      isLoading: false
     };
   },
   methods: {
-    signin() {
+    async signin() {
       if (this.$refs.login_form.validate()) {
-        this.$store.commit("changeAuthState", true);
-        this.$router.push("/");
+        this.isLoading = true;
+        console.log(this.email);
+        console.log(this.password);
+        await this.$store
+          .dispatch("auth/signUp", {
+            email: this.email,
+            password: this.password
+          })
+          .then(() => {
+            this.$store
+              .dispatch("auth/signInWithEmail", {
+                email: this.email,
+                password: this.password
+              })
+              .then(() => {
+                this.$router.push("/");
+              });
+          });
+        this.isLoading = false;
       }
     }
   }
@@ -96,6 +92,10 @@ export default {
 </script>
 
 <style scoped>
+.back {
+  position: absolute;
+  left: 10px;
+}
 .v-card {
   min-width: 640px;
 }

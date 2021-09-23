@@ -32,12 +32,12 @@
 export default {
   methods: {
     logout() {
-      this.$store.commit("changeAuthState", false);
+      this.$store.dispatch("auth/signOut");
     }
   },
   computed: {
     isAuth() {
-      return this.$store.getters["isAuth"];
+      return this.$store.getters["auth/isAuth"];
     },
     cartItems() {
       return this.$store.getters["cartItemsCount"];

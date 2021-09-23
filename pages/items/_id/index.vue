@@ -80,7 +80,7 @@ export default {
   },
   computed: {
     isAuth() {
-      return this.$store.getters["isAuth"];
+      return this.$store.getters["auth/isAuth"];
     }
   }
 };

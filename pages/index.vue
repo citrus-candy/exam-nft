@@ -5,6 +5,14 @@
   </div>
 </template>
 
+<script>
+export default {
+  created() {
+    this.$store.dispatch("auth/onAuthStateChanged");
+  }
+};
+</script>
+
 <style scoped>
 .container-wrapper {
   padding-left: 30px;

@@ -29,13 +29,37 @@
               ></v-text-field>
             </v-col>
             <v-col cols="5" sm="auto">
-              <v-btn class="pa-5" @click="login">
+              <v-btn class="pa-5" @click="login" :loading="isLoading">
                 <div class="text-h6">ログイン</div>
               </v-btn>
             </v-col>
           </v-row>
         </v-form>
       </v-card-text>
+      <!-- <v-card-text>
+        <v-row class="flex justify-center ma-2">
+          <v-col cols="8" sm="auto">
+            <v-btn
+              class="pa-5 text-capitalize caption"
+              @click="login"
+              color="#00FF00"
+            >
+              <v-icon left color="red">mdi-google</v-icon>
+              <div class="text-h6">Googleでログイン</div>
+            </v-btn>
+          </v-col>
+          <v-col cols="8" sm="auto">
+            <v-btn
+              class="pa-5 text-capitalize caption"
+              @click="login"
+              color="#00FFFF"
+            >
+              <v-icon left color="blue">mdi-twitter</v-icon>
+              <div class="text-h6">Twitterでログイン</div>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-card-text> -->
       <v-divider></v-divider>
       <v-card-text>
         <v-row class="flex-column align-center ma-2">
@@ -69,14 +93,21 @@ export default {
       passwordShow: false,
       passwordRules: {
         required: value => !!value || "パスワードは必須です"
-      }
+      },
+      isLoading: false
     };
   },
   methods: {
-    login() {
+    async login() {
       if (this.$refs.login_form.validate()) {
-        this.$store.commit("changeAuthState", true);
-        this.$router.push("/");
+        this.isLoading = true;
+        await this.$store
+          .dispatch("auth/signInWithEmail", {
+            email: this.email,
+            password: this.password
+          })
+          .then(() => this.$router.push("/"));
+        this.isLoading = false;
       }
     }
   }
