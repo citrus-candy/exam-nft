@@ -9,14 +9,35 @@ export const mutations = {
 };
 
 export const actions = {
-  signUp({ commit }, { email, password }) {
-    return this.$fire.auth.createUserWithEmailAndPassword(email, password);
+  async signUp({ dispatch }, { name, email, password }) {
+    try {
+      await this.$fire.auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(result => {
+          dispatch(
+            "firestore/addUser",
+            {
+              uid: result.user.uid,
+              name: name,
+              email: email,
+              password: password
+            },
+            { root: true }
+          );
+        });
+    } catch (e) {
+      console.error(e);
+    }
   },
 
-  signInWithEmail({ commit }, { email, password }) {
-    return this.$fire.auth
-      .signInWithEmailAndPassword(email, password)
-      .then(result => commit("setUserId", result.user.uid));
+  async signInWithEmail({ commit }, { email, password }) {
+    try {
+      await this.$fire.auth
+        .signInWithEmailAndPassword(email, password)
+        .then(result => commit("setUserId", result.user.uid));
+    } catch (e) {
+      console.error(e);
+    }
   },
 
   signInWithTwitter() {
@@ -29,8 +50,12 @@ export const actions = {
     return this.$fire.auth.signInWithPopup(authGoogle);
   },
 
-  signOut({ commit }) {
-    return this.$fire.auth.signOut().then(() => commit("setUserId", null));
+  async signOut({ commit }) {
+    try {
+      await this.$fire.auth.signOut().then(() => commit("setUserId", null));
+    } catch (e) {
+      console.error(e);
+    }
   },
 
   onAuthStateChanged({ commit }) {

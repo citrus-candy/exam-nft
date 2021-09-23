@@ -1,25 +1,25 @@
 export const state = () => ({
-  isAuth: false,
-  cartItemsCount: 0
+  cartItems: [],
+  tags: ["一般科目", "専門科目", "数学", "英語"]
 });
 
 export const getters = {
-  isAuth(state) {
-    return state.isAuth;
+  cartItems(state) {
+    return state.cartItems;
   },
   cartItemsCount(state) {
-    return state.cartItemsCount;
+    return state.cartItems.length;
+  },
+  tags(state) {
+    return state.tags;
   }
 };
 
 export const mutations = {
-  changeAuthState(state, isAuth) {
-    state.isAuth = isAuth;
-  },
-  incrementItems(state) {
-    state.cartItemsCount++;
+  cartItems(state, payload) {
+    state.cartItems.push(payload);
   },
   resetItems(state) {
-    state.cartItemsCount = 0;
+    state.cartItems = [];
   }
 };

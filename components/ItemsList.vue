@@ -10,27 +10,27 @@
         <v-card class="ma-auto" max-width="300" @click="details(i)">
           <v-img
             :class="{ 'on-hover': hover }"
-            :src="item[3]"
+            src="https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png"
             height="200px"
           ></v-img>
-          <v-card-title>{{ item[0] }}</v-card-title>
-          <v-card-subtitle>{{ item[1] }}</v-card-subtitle>
+          <v-card-title>{{ item.title }}</v-card-title>
+          <v-card-subtitle>{{ item.description }}</v-card-subtitle>
           <v-card-text class="text-h5 align-self-end">
-            {{ item[2] }} ペリカ
+            {{ item.price }} ペリカ
           </v-card-text>
           <v-card-actions>
             <v-chip
               class="ma-2"
-              v-for="(tag, i) in item[4]"
+              v-for="(tag, i) in item.tags"
               :key="i"
-              color="pink"
+              color="black"
               label
-              text-color="white"
+              outlined
             >
               <v-icon left>
                 mdi-label
               </v-icon>
-              {{ tag }}
+              {{ tags[tag] }}
             </v-chip>
           </v-card-actions>
         </v-card>
@@ -48,119 +48,27 @@
 export default {
   data() {
     return {
-      page: 1,
-      items: [
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ],
-        [
-          "過去問",
-          "去年のやつです",
-          10000,
-          "https://4.bp.blogspot.com/-gc_pG0Lr7GE/VJ6XKoPXnZI/AAAAAAAAqGo/1Hp3nOZo9CM/s400/test_print_mondaiyoushi.png",
-          ["解答あり", "数学"]
-        ]
-      ]
+      page: 1
     };
   },
+  created() {
+    this.$store.commit("firestore/resetItems");
+    this.$store.dispatch("firestore/getItemsSnapshot");
+  },
   methods: {
-    details(id) {
-      this.$router.push(`/items/${id}`);
+    details(i) {
+      this.$router.push(`/items/${i}`);
+    }
+  },
+  computed: {
+    items() {
+      return this.$store.getters["firestore/items"];
+    },
+    itemsId() {
+      return this.$store.getters["firestore/itemsId"];
+    },
+    tags() {
+      return this.$store.getters["tags"];
     }
   }
 };

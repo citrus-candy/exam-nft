@@ -4,8 +4,8 @@ require("dotenv").config();
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "exam-nft",
-    title: "exam-nft",
+    titleTemplate: "Exam NFT",
+    title: "Exam NFT",
     htmlAttrs: {
       lang: "ja"
     },

@@ -15,13 +15,13 @@
       <v-col>
         <v-row class="flex-column mt-2 details">
           <v-col class="mt-4">
-            <div class="text-h3">{{ details[0] }}</div>
+            <div class="text-h3">{{ items[id].title }}</div>
           </v-col>
           <v-divider></v-divider>
           <v-col>
             <v-chip
               class="ma-2"
-              v-for="(tag, i) in details[4]"
+              v-for="(tag, i) in items[id].tags"
               :key="i"
               color="pink"
               label
@@ -30,15 +30,15 @@
               <v-icon left>
                 mdi-label
               </v-icon>
-              {{ tag }}
+              {{ tags[tag] }}
             </v-chip>
           </v-col>
           <v-col>
-            <div class="text-h6" v-html="details[1]"></div>
+            <div class="text-h6" v-html="items[id].description"></div>
           </v-col>
           <v-divider></v-divider>
           <v-col class="mt-4" :class="{ 'mb-4': !isAuth }">
-            <div class="text-h4">{{ details[2] }} ペリカ</div>
+            <div class="text-h4">{{ items[id].price }} ペリカ</div>
           </v-col>
           <v-col
             v-show="isAuth"
@@ -60,6 +60,7 @@
 export default {
   data() {
     return {
+      id: null,
       carousel: 0,
       details: [
         "過去問",
@@ -73,14 +74,23 @@ export default {
       ]
     };
   },
+  created() {
+    this.id = this.$route.params.id;
+  },
   methods: {
     addCart() {
-      this.$store.commit("incrementItems");
+      this.$store.commit("cartItems", parseInt(this.id));
     }
   },
   computed: {
     isAuth() {
       return this.$store.getters["auth/isAuth"];
+    },
+    items() {
+      return this.$store.getters["firestore/items"];
+    },
+    tags() {
+      return this.$store.getters["tags"];
     }
   }
 };
