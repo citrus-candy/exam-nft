@@ -38,7 +38,7 @@
           </v-col>
           <v-divider></v-divider>
           <v-col class="mt-4" :class="{ 'mb-4': !isAuth }">
-            <div class="text-h4">{{ items[id].price }} ペリカ</div>
+            <div class="text-h4">{{ items[id].price }} コイン</div>
           </v-col>
           <v-col
             v-show="isAuth"

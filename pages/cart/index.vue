@@ -21,7 +21,7 @@
                     <p class="text-h5">{{ items[id].title }}</p>
                   </v-col>
                   <v-col>
-                    <p class="text-h5">{{ items[id].price }} ペリカ</p>
+                    <p class="text-h5">{{ items[id].price }} コイン</p>
                   </v-col>
                 </v-row>
               </v-col>
@@ -33,7 +33,7 @@
       <v-card-text>
         <v-row class="flex-column align-center ma-2">
           <v-col>
-            <p class="text-h5 text">合計：{{ totalPrice }} ペリカ</p>
+            <p class="text-h5 text">合計：{{ totalPrice }} コイン</p>
           </v-col>
           <v-col cols="9" sm="auto">
             <v-btn class="pa-5" @click="buyItems">

@@ -16,7 +16,7 @@
           <v-card-title>{{ item.title }}</v-card-title>
           <v-card-subtitle>{{ item.description }}</v-card-subtitle>
           <v-card-text class="text-h5 align-self-end">
-            {{ item.price }} ペリカ
+            {{ item.price }} コイン
           </v-card-text>
           <v-card-actions>
             <v-chip

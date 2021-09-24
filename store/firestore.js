@@ -86,6 +86,7 @@ export const actions = {
       await this.$fire.firestore
         .collection("items")
         .onSnapshot(querySnapshot => {
+          commit("resetItems");
           querySnapshot.forEach(doc => {
             console.log(doc.id, " => ", doc.data());
             commit("setItems", doc.data());

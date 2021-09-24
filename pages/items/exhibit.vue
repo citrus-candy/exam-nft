@@ -29,7 +29,7 @@
             v-model="price"
             class="pl-16 pr-16"
             label="価格*"
-            suffix="ペリカ"
+            suffix="コイン"
             type="number"
             :rules="[priceRules.required, priceRules.valid]"
             outlined
